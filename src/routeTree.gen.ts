@@ -10,232 +10,232 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./app/__root"
-import { Route as HomeImport } from "./app/home"
-import { Route as IndexImport } from "./app/index"
-import { Route as HomeDashboardIndexImport } from "./app/home/dashboard/index"
-import { Route as HomeBuilderIndexImport } from "./app/home/builder/index"
-import { Route as HomeSettingsOptionsImport } from "./app/home/settings/options"
-import { Route as HomeSettingsCompanyImport } from "./app/home/settings/company"
-import { Route as HomeSettingsAccountImport } from "./app/home/settings/account"
-import { Route as HomeBuilderBuilderIdImport } from "./app/home/builder/$builderId"
+import { Route as rootRoute } from "./app/__root";
+import { Route as HomeImport } from "./app/home";
+import { Route as IndexImport } from "./app/index";
+import { Route as HomeDashboardIndexImport } from "./app/home/dashboard/index";
+import { Route as HomeBuilderIndexImport } from "./app/home/builder/index";
+import { Route as HomeSettingsOptionsImport } from "./app/home/settings/options";
+import { Route as HomeSettingsCompanyImport } from "./app/home/settings/company";
+import { Route as HomeSettingsAccountImport } from "./app/home/settings/account";
+import { Route as HomeBuilderBuilderIdImport } from "./app/home/builder/$builderId";
 
 // Create/Update Routes
 
 const HomeRoute = HomeImport.update({
-  id: "/home",
-  path: "/home",
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/home",
+	path: "/home",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/",
+	path: "/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const HomeDashboardIndexRoute = HomeDashboardIndexImport.update({
-  id: "/dashboard/",
-  path: "/dashboard/",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/dashboard/",
+	path: "/dashboard/",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 const HomeBuilderIndexRoute = HomeBuilderIndexImport.update({
-  id: "/builder/",
-  path: "/builder/",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/builder/",
+	path: "/builder/",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 const HomeSettingsOptionsRoute = HomeSettingsOptionsImport.update({
-  id: "/settings/options",
-  path: "/settings/options",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/settings/options",
+	path: "/settings/options",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 const HomeSettingsCompanyRoute = HomeSettingsCompanyImport.update({
-  id: "/settings/company",
-  path: "/settings/company",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/settings/company",
+	path: "/settings/company",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 const HomeSettingsAccountRoute = HomeSettingsAccountImport.update({
-  id: "/settings/account",
-  path: "/settings/account",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/settings/account",
+	path: "/settings/account",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 const HomeBuilderBuilderIdRoute = HomeBuilderBuilderIdImport.update({
-  id: "/builder/$builderId",
-  path: "/builder/$builderId",
-  getParentRoute: () => HomeRoute,
-} as any)
+	id: "/builder/$builderId",
+	path: "/builder/$builderId",
+	getParentRoute: () => HomeRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
-  interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    "/home": {
-      id: "/home"
-      path: "/home"
-      fullPath: "/home"
-      preLoaderRoute: typeof HomeImport
-      parentRoute: typeof rootRoute
-    }
-    "/home/builder/$builderId": {
-      id: "/home/builder/$builderId"
-      path: "/builder/$builderId"
-      fullPath: "/home/builder/$builderId"
-      preLoaderRoute: typeof HomeBuilderBuilderIdImport
-      parentRoute: typeof HomeImport
-    }
-    "/home/settings/account": {
-      id: "/home/settings/account"
-      path: "/settings/account"
-      fullPath: "/home/settings/account"
-      preLoaderRoute: typeof HomeSettingsAccountImport
-      parentRoute: typeof HomeImport
-    }
-    "/home/settings/company": {
-      id: "/home/settings/company"
-      path: "/settings/company"
-      fullPath: "/home/settings/company"
-      preLoaderRoute: typeof HomeSettingsCompanyImport
-      parentRoute: typeof HomeImport
-    }
-    "/home/settings/options": {
-      id: "/home/settings/options"
-      path: "/settings/options"
-      fullPath: "/home/settings/options"
-      preLoaderRoute: typeof HomeSettingsOptionsImport
-      parentRoute: typeof HomeImport
-    }
-    "/home/builder/": {
-      id: "/home/builder/"
-      path: "/builder"
-      fullPath: "/home/builder"
-      preLoaderRoute: typeof HomeBuilderIndexImport
-      parentRoute: typeof HomeImport
-    }
-    "/home/dashboard/": {
-      id: "/home/dashboard/"
-      path: "/dashboard"
-      fullPath: "/home/dashboard"
-      preLoaderRoute: typeof HomeDashboardIndexImport
-      parentRoute: typeof HomeImport
-    }
-  }
+	interface FileRoutesByPath {
+		"/": {
+			id: "/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof IndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/home": {
+			id: "/home";
+			path: "/home";
+			fullPath: "/home";
+			preLoaderRoute: typeof HomeImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/home/builder/$builderId": {
+			id: "/home/builder/$builderId";
+			path: "/builder/$builderId";
+			fullPath: "/home/builder/$builderId";
+			preLoaderRoute: typeof HomeBuilderBuilderIdImport;
+			parentRoute: typeof HomeImport;
+		};
+		"/home/settings/account": {
+			id: "/home/settings/account";
+			path: "/settings/account";
+			fullPath: "/home/settings/account";
+			preLoaderRoute: typeof HomeSettingsAccountImport;
+			parentRoute: typeof HomeImport;
+		};
+		"/home/settings/company": {
+			id: "/home/settings/company";
+			path: "/settings/company";
+			fullPath: "/home/settings/company";
+			preLoaderRoute: typeof HomeSettingsCompanyImport;
+			parentRoute: typeof HomeImport;
+		};
+		"/home/settings/options": {
+			id: "/home/settings/options";
+			path: "/settings/options";
+			fullPath: "/home/settings/options";
+			preLoaderRoute: typeof HomeSettingsOptionsImport;
+			parentRoute: typeof HomeImport;
+		};
+		"/home/builder/": {
+			id: "/home/builder/";
+			path: "/builder";
+			fullPath: "/home/builder";
+			preLoaderRoute: typeof HomeBuilderIndexImport;
+			parentRoute: typeof HomeImport;
+		};
+		"/home/dashboard/": {
+			id: "/home/dashboard/";
+			path: "/dashboard";
+			fullPath: "/home/dashboard";
+			preLoaderRoute: typeof HomeDashboardIndexImport;
+			parentRoute: typeof HomeImport;
+		};
+	}
 }
 
 // Create and export the route tree
 
 interface HomeRouteChildren {
-  HomeBuilderBuilderIdRoute: typeof HomeBuilderBuilderIdRoute
-  HomeSettingsAccountRoute: typeof HomeSettingsAccountRoute
-  HomeSettingsCompanyRoute: typeof HomeSettingsCompanyRoute
-  HomeSettingsOptionsRoute: typeof HomeSettingsOptionsRoute
-  HomeBuilderIndexRoute: typeof HomeBuilderIndexRoute
-  HomeDashboardIndexRoute: typeof HomeDashboardIndexRoute
+	HomeBuilderBuilderIdRoute: typeof HomeBuilderBuilderIdRoute;
+	HomeSettingsAccountRoute: typeof HomeSettingsAccountRoute;
+	HomeSettingsCompanyRoute: typeof HomeSettingsCompanyRoute;
+	HomeSettingsOptionsRoute: typeof HomeSettingsOptionsRoute;
+	HomeBuilderIndexRoute: typeof HomeBuilderIndexRoute;
+	HomeDashboardIndexRoute: typeof HomeDashboardIndexRoute;
 }
 
 const HomeRouteChildren: HomeRouteChildren = {
-  HomeBuilderBuilderIdRoute: HomeBuilderBuilderIdRoute,
-  HomeSettingsAccountRoute: HomeSettingsAccountRoute,
-  HomeSettingsCompanyRoute: HomeSettingsCompanyRoute,
-  HomeSettingsOptionsRoute: HomeSettingsOptionsRoute,
-  HomeBuilderIndexRoute: HomeBuilderIndexRoute,
-  HomeDashboardIndexRoute: HomeDashboardIndexRoute,
-}
+	HomeBuilderBuilderIdRoute: HomeBuilderBuilderIdRoute,
+	HomeSettingsAccountRoute: HomeSettingsAccountRoute,
+	HomeSettingsCompanyRoute: HomeSettingsCompanyRoute,
+	HomeSettingsOptionsRoute: HomeSettingsOptionsRoute,
+	HomeBuilderIndexRoute: HomeBuilderIndexRoute,
+	HomeDashboardIndexRoute: HomeDashboardIndexRoute,
+};
 
-const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
+const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren);
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute
-  "/home": typeof HomeRouteWithChildren
-  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
-  "/home/settings/account": typeof HomeSettingsAccountRoute
-  "/home/settings/company": typeof HomeSettingsCompanyRoute
-  "/home/settings/options": typeof HomeSettingsOptionsRoute
-  "/home/builder": typeof HomeBuilderIndexRoute
-  "/home/dashboard": typeof HomeDashboardIndexRoute
+	"/": typeof IndexRoute;
+	"/home": typeof HomeRouteWithChildren;
+	"/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute;
+	"/home/settings/account": typeof HomeSettingsAccountRoute;
+	"/home/settings/company": typeof HomeSettingsCompanyRoute;
+	"/home/settings/options": typeof HomeSettingsOptionsRoute;
+	"/home/builder": typeof HomeBuilderIndexRoute;
+	"/home/dashboard": typeof HomeDashboardIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute
-  "/home": typeof HomeRouteWithChildren
-  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
-  "/home/settings/account": typeof HomeSettingsAccountRoute
-  "/home/settings/company": typeof HomeSettingsCompanyRoute
-  "/home/settings/options": typeof HomeSettingsOptionsRoute
-  "/home/builder": typeof HomeBuilderIndexRoute
-  "/home/dashboard": typeof HomeDashboardIndexRoute
+	"/": typeof IndexRoute;
+	"/home": typeof HomeRouteWithChildren;
+	"/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute;
+	"/home/settings/account": typeof HomeSettingsAccountRoute;
+	"/home/settings/company": typeof HomeSettingsCompanyRoute;
+	"/home/settings/options": typeof HomeSettingsOptionsRoute;
+	"/home/builder": typeof HomeBuilderIndexRoute;
+	"/home/dashboard": typeof HomeDashboardIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  "/": typeof IndexRoute
-  "/home": typeof HomeRouteWithChildren
-  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
-  "/home/settings/account": typeof HomeSettingsAccountRoute
-  "/home/settings/company": typeof HomeSettingsCompanyRoute
-  "/home/settings/options": typeof HomeSettingsOptionsRoute
-  "/home/builder/": typeof HomeBuilderIndexRoute
-  "/home/dashboard/": typeof HomeDashboardIndexRoute
+	__root__: typeof rootRoute;
+	"/": typeof IndexRoute;
+	"/home": typeof HomeRouteWithChildren;
+	"/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute;
+	"/home/settings/account": typeof HomeSettingsAccountRoute;
+	"/home/settings/company": typeof HomeSettingsCompanyRoute;
+	"/home/settings/options": typeof HomeSettingsOptionsRoute;
+	"/home/builder/": typeof HomeBuilderIndexRoute;
+	"/home/dashboard/": typeof HomeDashboardIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | "/"
-    | "/home"
-    | "/home/builder/$builderId"
-    | "/home/settings/account"
-    | "/home/settings/company"
-    | "/home/settings/options"
-    | "/home/builder"
-    | "/home/dashboard"
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | "/"
-    | "/home"
-    | "/home/builder/$builderId"
-    | "/home/settings/account"
-    | "/home/settings/company"
-    | "/home/settings/options"
-    | "/home/builder"
-    | "/home/dashboard"
-  id:
-    | "__root__"
-    | "/"
-    | "/home"
-    | "/home/builder/$builderId"
-    | "/home/settings/account"
-    | "/home/settings/company"
-    | "/home/settings/options"
-    | "/home/builder/"
-    | "/home/dashboard/"
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths:
+		| "/"
+		| "/home"
+		| "/home/builder/$builderId"
+		| "/home/settings/account"
+		| "/home/settings/company"
+		| "/home/settings/options"
+		| "/home/builder"
+		| "/home/dashboard";
+	fileRoutesByTo: FileRoutesByTo;
+	to:
+		| "/"
+		| "/home"
+		| "/home/builder/$builderId"
+		| "/home/settings/account"
+		| "/home/settings/company"
+		| "/home/settings/options"
+		| "/home/builder"
+		| "/home/dashboard";
+	id:
+		| "__root__"
+		| "/"
+		| "/home"
+		| "/home/builder/$builderId"
+		| "/home/settings/account"
+		| "/home/settings/company"
+		| "/home/settings/options"
+		| "/home/builder/"
+		| "/home/dashboard/";
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  HomeRoute: typeof HomeRouteWithChildren
+	IndexRoute: typeof IndexRoute;
+	HomeRoute: typeof HomeRouteWithChildren;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  HomeRoute: HomeRouteWithChildren,
-}
+	IndexRoute: IndexRoute,
+	HomeRoute: HomeRouteWithChildren,
+};
 
 export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

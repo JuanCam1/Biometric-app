@@ -1,2 +1,2 @@
-export * from './constantes';
-export * from './estado';
+export * from "./constantes";
+export * from "./estado";
