@@ -100,20 +100,24 @@ model Visitant {
 }
 
 model Visit {
-  id           Int        @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   dateEntry    DateTime
   timeEntry    String
   dateExit     DateTime?
   timeExit     String?
   observation  String?
   stateId      Int
-  state        State      @relation("StateVisita", fields: [stateId], references: [id])
-  apartmentId  Int
-  apartment    Apartament @relation("apartVisit", fields: [apartmentId], references: [id])
-  authorizerId Int
-  authorizer   Resident   @relation("visitResident", fields: [authorizerId], references: [id])
+  state        State     @relation("StateVisita", fields: [stateId], references: [id])
   visitantId   Int
-  visitant     Visitant   @relation("visitVisitant", fields: [visitantId], references: [id])
+  visitant     Visitant  @relation("visitVisitant", fields: [visitantId], references: [id])
+  authorizerId Int
+  authorizer   Resident  @relation("visitResident", fields: [authorizerId], references: [id])
+
+  apartmentId Int?
+  apartment   Apartament? @relation("apartVisit", fields: [apartmentId], references: [id])
+
+  administrationAreaId Int?
+  administrationArea   AdministrationArea? @relation("areaVisit", fields: [administrationAreaId], references: [id])
 }
 
 model Role {
@@ -161,4 +165,11 @@ model Company {
   email       String?
   website     String?
   nit         String?
+}
+
+model AdministrationArea {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+  visits      Visit[] @relation("areaVisit")
 }

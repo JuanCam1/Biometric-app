@@ -22,7 +22,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { type Theme, useTheme } from "@/contexts/theme-provider";
 import { cn } from "@/lib/utils";
@@ -86,8 +85,8 @@ function OptionsComponent() {
               Tema de la Aplicación
             </h3>
 
-            <div className="flex flex-col gap-3 w-full">
-              <div className="flex justify-center gap-3 w-full">
+            <div className="flex flex-col justify-center items-center gap-3 w-full">
+              <div className="flex gap-3 w-full max-w-[80%]">
                 <button
                   onClick={() => onChangeTheme("light")}
                   type="button"
@@ -183,7 +182,7 @@ function OptionsComponent() {
               </div>
 
               <div className="flex justify-end">
-                <Button type="submit">
+                <Button type="submit" className="bg-primary max-sm:w-full text-white">
                   <Save className="mr-2 w-4 h-4" />
                   Guardar Configuración
                 </Button>
