@@ -145,5 +145,20 @@ model Configuration {
   id                     Int    @id @default(autoincrement())
   theme                  String @default("light")
   builderType            String @default("Torre")
+  aptType                String @default("Apartamento")
   maxVehiclesPerResident Int    @default(2)
+}
+
+model Company {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String?
+  logo        String?
+  address     String?
+  city        String?
+  postalCode  String?
+  phone       String?
+  email       String?
+  website     String?
+  nit         String?
 }

@@ -15,6 +15,9 @@ import { Route as HomeImport } from "./app/home"
 import { Route as IndexImport } from "./app/index"
 import { Route as HomeDashboardIndexImport } from "./app/home/dashboard/index"
 import { Route as HomeBuilderIndexImport } from "./app/home/builder/index"
+import { Route as HomeSettingsOptionsImport } from "./app/home/settings/options"
+import { Route as HomeSettingsCompanyImport } from "./app/home/settings/company"
+import { Route as HomeSettingsAccountImport } from "./app/home/settings/account"
 import { Route as HomeBuilderBuilderIdImport } from "./app/home/builder/$builderId"
 
 // Create/Update Routes
@@ -40,6 +43,24 @@ const HomeDashboardIndexRoute = HomeDashboardIndexImport.update({
 const HomeBuilderIndexRoute = HomeBuilderIndexImport.update({
   id: "/builder/",
   path: "/builder/",
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeSettingsOptionsRoute = HomeSettingsOptionsImport.update({
+  id: "/settings/options",
+  path: "/settings/options",
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeSettingsCompanyRoute = HomeSettingsCompanyImport.update({
+  id: "/settings/company",
+  path: "/settings/company",
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeSettingsAccountRoute = HomeSettingsAccountImport.update({
+  id: "/settings/account",
+  path: "/settings/account",
   getParentRoute: () => HomeRoute,
 } as any)
 
@@ -74,6 +95,27 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof HomeBuilderBuilderIdImport
       parentRoute: typeof HomeImport
     }
+    "/home/settings/account": {
+      id: "/home/settings/account"
+      path: "/settings/account"
+      fullPath: "/home/settings/account"
+      preLoaderRoute: typeof HomeSettingsAccountImport
+      parentRoute: typeof HomeImport
+    }
+    "/home/settings/company": {
+      id: "/home/settings/company"
+      path: "/settings/company"
+      fullPath: "/home/settings/company"
+      preLoaderRoute: typeof HomeSettingsCompanyImport
+      parentRoute: typeof HomeImport
+    }
+    "/home/settings/options": {
+      id: "/home/settings/options"
+      path: "/settings/options"
+      fullPath: "/home/settings/options"
+      preLoaderRoute: typeof HomeSettingsOptionsImport
+      parentRoute: typeof HomeImport
+    }
     "/home/builder/": {
       id: "/home/builder/"
       path: "/builder"
@@ -95,12 +137,18 @@ declare module "@tanstack/react-router" {
 
 interface HomeRouteChildren {
   HomeBuilderBuilderIdRoute: typeof HomeBuilderBuilderIdRoute
+  HomeSettingsAccountRoute: typeof HomeSettingsAccountRoute
+  HomeSettingsCompanyRoute: typeof HomeSettingsCompanyRoute
+  HomeSettingsOptionsRoute: typeof HomeSettingsOptionsRoute
   HomeBuilderIndexRoute: typeof HomeBuilderIndexRoute
   HomeDashboardIndexRoute: typeof HomeDashboardIndexRoute
 }
 
 const HomeRouteChildren: HomeRouteChildren = {
   HomeBuilderBuilderIdRoute: HomeBuilderBuilderIdRoute,
+  HomeSettingsAccountRoute: HomeSettingsAccountRoute,
+  HomeSettingsCompanyRoute: HomeSettingsCompanyRoute,
+  HomeSettingsOptionsRoute: HomeSettingsOptionsRoute,
   HomeBuilderIndexRoute: HomeBuilderIndexRoute,
   HomeDashboardIndexRoute: HomeDashboardIndexRoute,
 }
@@ -111,6 +159,9 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/home": typeof HomeRouteWithChildren
   "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/settings/account": typeof HomeSettingsAccountRoute
+  "/home/settings/company": typeof HomeSettingsCompanyRoute
+  "/home/settings/options": typeof HomeSettingsOptionsRoute
   "/home/builder": typeof HomeBuilderIndexRoute
   "/home/dashboard": typeof HomeDashboardIndexRoute
 }
@@ -119,6 +170,9 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/home": typeof HomeRouteWithChildren
   "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/settings/account": typeof HomeSettingsAccountRoute
+  "/home/settings/company": typeof HomeSettingsCompanyRoute
+  "/home/settings/options": typeof HomeSettingsOptionsRoute
   "/home/builder": typeof HomeBuilderIndexRoute
   "/home/dashboard": typeof HomeDashboardIndexRoute
 }
@@ -128,6 +182,9 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/home": typeof HomeRouteWithChildren
   "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/settings/account": typeof HomeSettingsAccountRoute
+  "/home/settings/company": typeof HomeSettingsCompanyRoute
+  "/home/settings/options": typeof HomeSettingsOptionsRoute
   "/home/builder/": typeof HomeBuilderIndexRoute
   "/home/dashboard/": typeof HomeDashboardIndexRoute
 }
@@ -138,6 +195,9 @@ export interface FileRouteTypes {
     | "/"
     | "/home"
     | "/home/builder/$builderId"
+    | "/home/settings/account"
+    | "/home/settings/company"
+    | "/home/settings/options"
     | "/home/builder"
     | "/home/dashboard"
   fileRoutesByTo: FileRoutesByTo
@@ -145,6 +205,9 @@ export interface FileRouteTypes {
     | "/"
     | "/home"
     | "/home/builder/$builderId"
+    | "/home/settings/account"
+    | "/home/settings/company"
+    | "/home/settings/options"
     | "/home/builder"
     | "/home/dashboard"
   id:
@@ -152,6 +215,9 @@ export interface FileRouteTypes {
     | "/"
     | "/home"
     | "/home/builder/$builderId"
+    | "/home/settings/account"
+    | "/home/settings/company"
+    | "/home/settings/options"
     | "/home/builder/"
     | "/home/dashboard/"
   fileRoutesById: FileRoutesById
@@ -188,12 +254,27 @@ export const routeTree = rootRoute
       "filePath": "home.tsx",
       "children": [
         "/home/builder/$builderId",
+        "/home/settings/account",
+        "/home/settings/company",
+        "/home/settings/options",
         "/home/builder/",
         "/home/dashboard/"
       ]
     },
     "/home/builder/$builderId": {
       "filePath": "home/builder/$builderId.tsx",
+      "parent": "/home"
+    },
+    "/home/settings/account": {
+      "filePath": "home/settings/account.tsx",
+      "parent": "/home"
+    },
+    "/home/settings/company": {
+      "filePath": "home/settings/company.tsx",
+      "parent": "/home"
+    },
+    "/home/settings/options": {
+      "filePath": "home/settings/options.tsx",
       "parent": "/home"
     },
     "/home/builder/": {
