@@ -8,10 +8,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import BuilderList from "@/features/builder/builder/sections/builder-list";
-import { getAllBuilder } from "@/features/builder/builder/services/builder-api";
 import { createFileRoute } from "@tanstack/react-router";
 import { CirclePlus, Search } from "lucide-react";
-import { useEffect } from "react";
 
 export const Route = createFileRoute("/home/builder/")({
   component: BuilderComponent,
@@ -19,18 +17,6 @@ export const Route = createFileRoute("/home/builder/")({
 
 function BuilderComponent() {
 
-  useEffect(() => {
-    builderListFetch();
-  }, [])
-
-  const builderListFetch = async () => {
-    try {
-      const builders = await getAllBuilder();
-      console.log(builders);
-    } catch (e) {
-      console.log(e)
-    }
-  }
   return (
     <div className="flex flex-col items-center gap-8 p-8 w-full h-full">
       <Card className="relative dark:bg-zinc-950/80 w-full">
