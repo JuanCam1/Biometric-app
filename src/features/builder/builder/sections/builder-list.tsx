@@ -2,8 +2,6 @@ import { Building2, Edit, MoreHorizontal, Trash } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -61,7 +59,7 @@ const torres: Torre[] = [
 
 const BuilderList = () => {
   return (
-    <div className="gap-4 grid md:grid-cols-2 lg:grid-cols-5">
+    <div className="gap-4 grid md:grid-cols-3 lg:grid-cols-6">
       {torres.map((torre) => (
         <Link
           key={torre.id}
@@ -74,13 +72,11 @@ const BuilderList = () => {
             className="dark:bg-zinc-900 dark:border-zinc-600 overflow-hidden"
           >
             <CardHeader className="relative pt-8 pb-2">
-              <div className="flex justify-between items-center">
-                <div>
-                  <CardTitle className="flex items-center gap-2 md:text-sm">
-                    <Building2 className="w-5 h-5" />
-                    {torre.nombre}
-                  </CardTitle>
-                </div>
+              <div className="flex flex-col justify-start items-start gap-2">
+                <CardTitle className="flex items-center gap-2 md:text-sm">
+                  <Building2 className="w-5 h-5" />
+                  {torre.nombre}
+                </CardTitle>
                 <Badge
                   className="text-white"
                   variant={
@@ -132,18 +128,6 @@ const BuilderList = () => {
                 </div>
               </div>
             </CardContent>
-            {/* <CardFooter className="flex justify-between">
-              <Button variant="outline" size="sm" asChild>
-                <Link
-                  to="/home/builder/$builderId"
-                  params={{
-                    builderId: torre.id.toString(),
-                  }}
-                >
-                  Ver Apartamentos
-                </Link>
-              </Button>
-            </CardFooter> */}
           </Card>
         </Link>
       ))}

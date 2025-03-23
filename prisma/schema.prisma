@@ -49,6 +49,7 @@ model TypeDocument {
   id        Int        @id @default(autoincrement())
   type      String     @unique
   residents Resident[] @relation("TypeDocumentResident")
+  User      User[]     @relation("TypeDocumentUser")
 }
 
 model State {
@@ -112,6 +113,8 @@ model Visit {
   visitant     Visitant  @relation("visitVisitant", fields: [visitantId], references: [id])
   authorizerId Int
   authorizer   Resident  @relation("visitResident", fields: [authorizerId], references: [id])
+  userId       Int
+  user         User      @relation("visitUser", fields: [userId], references: [id])
 
   apartmentId Int?
   apartment   Apartament? @relation("apartVisit", fields: [apartmentId], references: [id])
@@ -127,15 +130,20 @@ model Role {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  password String
-  phone    String?
-  roleId   Int
-  role     Role     @relation("RoleUsuarios", fields: [roleId], references: [id])
-  sessions Sesion[] @relation("SesionUsuario")
-  stateId  Int
-  state    State    @relation("StateUser", fields: [stateId], references: [id])
+  id             Int          @id @default(autoincrement())
+  username       String
+  email          String       @unique
+  password       String
+  phone          String?
+  idCard         String       @unique
+  documentTypeId Int
+  documentType   TypeDocument @relation("TypeDocumentUser", fields: [documentTypeId], references: [id])
+  roleId         Int
+  role           Role         @relation("RoleUsuarios", fields: [roleId], references: [id])
+  sessions       Sesion[]     @relation("SesionUsuario")
+  stateId        Int
+  state          State        @relation("StateUser", fields: [stateId], references: [id])
+  visits         Visit[]      @relation("visitUser")
 }
 
 model Sesion {
