@@ -11,6 +11,8 @@ model Builder {
   id         Int          @id @default(autoincrement())
   name       String       @unique
   apartments Apartament[] @relation("apartBuilder")
+  stateId    Int
+  state      State        @relation("StateBuilder", fields: [stateId], references: [id])
 }
 
 model Apartament {
@@ -20,6 +22,8 @@ model Apartament {
   builder   Builder    @relation("apartBuilder", fields: [builderId], references: [id])
   residents Resident[] @relation("apartResident")
   visits    Visit[]    @relation("apartVisit")
+  stateId   Int
+  state     State      @relation("StateApart", fields: [stateId], references: [id])
 
   @@unique([builderId, name])
 }
@@ -37,6 +41,8 @@ model Vehicle {
   typeId       Int
   type         TypeVehicle       @relation("TypeVehVehicle", fields: [typeId], references: [id])
   owners       VehicleResident[] @relation("vehicleResidentVehicle")
+  stateId      Int
+  state        State             @relation("StateVeh", fields: [stateId], references: [id])
 }
 
 model TypeDocument {
@@ -52,13 +58,15 @@ model State {
   visit            Visit[]           @relation("StateVisita")
   user             User[]            @relation("StateUser")
   vehicleResidents VehicleResident[] @relation("StateVehResident")
+  Builder          Builder[]         @relation("StateBuilder")
+  Apartaments      Apartament[]      @relation("StateApart")
+  Vehicle          Vehicle[]         @relation("StateVeh")
 }
 
 model Resident {
   id             Int               @id @default(autoincrement())
   name           String
   idCard         String            @unique
-  phone          String
   documentTypeId Int
   documentType   TypeDocument      @relation("TypeDocumentResident", fields: [documentTypeId], references: [id])
   stateId        Int
@@ -118,6 +126,7 @@ model User {
   id       Int      @id @default(autoincrement())
   username String   @unique
   password String
+  phone    String?
   roleId   Int
   role     Role     @relation("RoleUsuarios", fields: [roleId], references: [id])
   sessions Sesion[] @relation("SesionUsuario")

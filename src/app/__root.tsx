@@ -1,15 +1,13 @@
-import Navbar from "@/components/shared/navbar";
-import TitleBar from "@/components/shared/title-bar";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
-  component: () => (
-    <>
-      <TitleBar />
-      <Navbar />
-      <div className="px-4 pt-16">
-        <Outlet />
-      </div>
-    </>
-  ),
+	component: RootComponent,
 });
+
+function RootComponent() {
+	return (
+		<div className="flex flex-col justify-center items-center gap-6 bg-muted dark:bg-zinc-950 min-h-svh">
+			<Outlet />
+		</div>
+	);
+}

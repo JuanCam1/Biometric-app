@@ -11,14 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from "./app/__root"
-import { Route as AboutImport } from "./app/about"
+import { Route as HomeImport } from "./app/home"
 import { Route as IndexImport } from "./app/index"
+import { Route as HomeDashboardIndexImport } from "./app/home/dashboard/index"
+import { Route as HomeBuilderIndexImport } from "./app/home/builder/index"
+import { Route as HomeBuilderBuilderIdImport } from "./app/home/builder/$builderId"
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  id: "/about",
-  path: "/about",
+const HomeRoute = HomeImport.update({
+  id: "/home",
+  path: "/home",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -26,6 +29,24 @@ const IndexRoute = IndexImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => rootRoute,
+} as any)
+
+const HomeDashboardIndexRoute = HomeDashboardIndexImport.update({
+  id: "/dashboard/",
+  path: "/dashboard/",
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeBuilderIndexRoute = HomeBuilderIndexImport.update({
+  id: "/builder/",
+  path: "/builder/",
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeBuilderBuilderIdRoute = HomeBuilderBuilderIdImport.update({
+  id: "/builder/$builderId",
+  path: "/builder/$builderId",
+  getParentRoute: () => HomeRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -39,51 +60,111 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    "/about": {
-      id: "/about"
-      path: "/about"
-      fullPath: "/about"
-      preLoaderRoute: typeof AboutImport
+    "/home": {
+      id: "/home"
+      path: "/home"
+      fullPath: "/home"
+      preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
+    }
+    "/home/builder/$builderId": {
+      id: "/home/builder/$builderId"
+      path: "/builder/$builderId"
+      fullPath: "/home/builder/$builderId"
+      preLoaderRoute: typeof HomeBuilderBuilderIdImport
+      parentRoute: typeof HomeImport
+    }
+    "/home/builder/": {
+      id: "/home/builder/"
+      path: "/builder"
+      fullPath: "/home/builder"
+      preLoaderRoute: typeof HomeBuilderIndexImport
+      parentRoute: typeof HomeImport
+    }
+    "/home/dashboard/": {
+      id: "/home/dashboard/"
+      path: "/dashboard"
+      fullPath: "/home/dashboard"
+      preLoaderRoute: typeof HomeDashboardIndexImport
+      parentRoute: typeof HomeImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface HomeRouteChildren {
+  HomeBuilderBuilderIdRoute: typeof HomeBuilderBuilderIdRoute
+  HomeBuilderIndexRoute: typeof HomeBuilderIndexRoute
+  HomeDashboardIndexRoute: typeof HomeDashboardIndexRoute
+}
+
+const HomeRouteChildren: HomeRouteChildren = {
+  HomeBuilderBuilderIdRoute: HomeBuilderBuilderIdRoute,
+  HomeBuilderIndexRoute: HomeBuilderIndexRoute,
+  HomeDashboardIndexRoute: HomeDashboardIndexRoute,
+}
+
+const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
+
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/home": typeof HomeRouteWithChildren
+  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/builder": typeof HomeBuilderIndexRoute
+  "/home/dashboard": typeof HomeDashboardIndexRoute
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/home": typeof HomeRouteWithChildren
+  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/builder": typeof HomeBuilderIndexRoute
+  "/home/dashboard": typeof HomeDashboardIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/home": typeof HomeRouteWithChildren
+  "/home/builder/$builderId": typeof HomeBuilderBuilderIdRoute
+  "/home/builder/": typeof HomeBuilderIndexRoute
+  "/home/dashboard/": typeof HomeDashboardIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/about"
+  fullPaths:
+    | "/"
+    | "/home"
+    | "/home/builder/$builderId"
+    | "/home/builder"
+    | "/home/dashboard"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/about"
-  id: "__root__" | "/" | "/about"
+  to:
+    | "/"
+    | "/home"
+    | "/home/builder/$builderId"
+    | "/home/builder"
+    | "/home/dashboard"
+  id:
+    | "__root__"
+    | "/"
+    | "/home"
+    | "/home/builder/$builderId"
+    | "/home/builder/"
+    | "/home/dashboard/"
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  HomeRoute: typeof HomeRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  HomeRoute: HomeRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +178,31 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/home"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/home": {
+      "filePath": "home.tsx",
+      "children": [
+        "/home/builder/$builderId",
+        "/home/builder/",
+        "/home/dashboard/"
+      ]
+    },
+    "/home/builder/$builderId": {
+      "filePath": "home/builder/$builderId.tsx",
+      "parent": "/home"
+    },
+    "/home/builder/": {
+      "filePath": "home/builder/index.tsx",
+      "parent": "/home"
+    },
+    "/home/dashboard/": {
+      "filePath": "home/dashboard/index.tsx",
+      "parent": "/home"
     }
   }
 }

@@ -9,7 +9,7 @@ const idRoot = document.getElementById("root") as HTMLElement;
 const root = createRoot(idRoot);
 
 root.render(
-  <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-    <App />
-  </ThemeProvider>
+	<ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+		<App />
+	</ThemeProvider>,
 );
