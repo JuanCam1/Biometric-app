@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Building2, Edit, MoreHorizontal, Trash } from "lucide-react";
 import {
   Card,
@@ -15,16 +18,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { getAllBuilder } from "../services/builder-api";
 import { Skeleton } from "@/components/ui/skeleton";
+import useBuilderProvider from "../hooks/use-builder-provider";
+import { getAllBuilder } from "../services/builder-api";
+import { KeysQuery } from "@/const/keys-query";
 
 const BuilderList = () => {
+  const { changeCountBuilder } = useBuilderProvider();
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ['builder-list'],
-    queryFn: getAllBuilder,
+    queryKey: [KeysQuery.builderList],
+    queryFn: getAllBuilder
   })
+
+  useEffect(() => {
+    if (data?.data) {
+      changeCountBuilder(data.data.length)
+    }
+  }, [data?.data])
 
   if (isPending) {
     return (
@@ -43,7 +53,6 @@ const BuilderList = () => {
     return <span>Error: {error.message}</span>
   }
 
-  console.log(data);
   return (
     <div className="gap-4 grid md:grid-cols-3 lg:grid-cols-6">
       {
@@ -55,7 +64,8 @@ const BuilderList = () => {
               to="/home/builder/$builderId"
               params={{
                 builderId: builder.id.toString(),
-              }}>
+              }}
+            >
               <Card
                 key={builder.id}
                 className="dark:bg-zinc-900 dark:border-zinc-600 overflow-hidden"
@@ -110,7 +120,7 @@ const BuilderList = () => {
                 <CardContent className="pb-4">
                   <div className="space-y-2">
                     <div className="flex text-sm">
-                      <span className="text-muted-foreground">Apartamentos: </span>
+                      <span className="text-muted-foreground">Apts: </span>
                       <span className="pl-2 font-medium">
                         {builder.totalApartments}
                       </span>

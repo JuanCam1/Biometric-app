@@ -9,14 +9,20 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 
 const config: ForgeConfig = {
   packagerConfig: {
+    extraResource: [
+      "prisma/**/*",
+      "node_modules/.prisma/**/*",
+      ".env"
+    ],
     asar: true,
+    icon: "./resources/logo.png"
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [new MakerSquirrel({
+    name: 'Biometrico',
+  }), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
   plugins: [
     new VitePlugin({
-      // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
-      // If you are familiar with Vite configuration, it will look really familiar.
       build: [
         {
           // `entry` is just an alias for `build.lib.entry` in the corresponding file of `config`.

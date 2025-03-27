@@ -78,6 +78,7 @@ const NavUser = () => {
               </Link>
             </DropdownMenuGroup>
             <button
+              className="w-full"
               type="button"
               onClick={logout}
             >

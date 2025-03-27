@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  // output   = "../node_modules/@prisma/client-generated"
 }
 
 datasource db {
@@ -147,18 +148,26 @@ model User {
 }
 
 model Sesion {
-  id     Int     @id @default(autoincrement())
-  token  String? @unique
-  userId Int
-  user   User    @relation("SesionUsuario", fields: [userId], references: [id])
+  id           Int     @id @default(autoincrement())
+  token        String? @unique
+  date_created String
+  time_created String
+  userId       Int
+  user         User    @relation("SesionUsuario", fields: [userId], references: [id])
 }
 
 model Configuration {
   id                     Int    @id @default(autoincrement())
-  theme                  String @default("light")
+  theme                  Theme  @default(light)
   builderType            String @default("Torre")
   aptType                String @default("Apartamento")
   maxVehiclesPerResident Int    @default(2)
+}
+
+enum Theme {
+  light
+  dark
+  system
 }
 
 model Company {

@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -6,7 +7,8 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import TypographyH3 from "../typography-h3";
-import { useNavigate } from "@tanstack/react-router";
+import logoProfile from "@/assets/profillem.jpeg";
+
 
 const ProfileNavbar = () => {
   const { open, openMobile } = useSidebar();
@@ -27,7 +29,7 @@ const ProfileNavbar = () => {
           className="flex flex-col justify-center items-center data-[state=open]:bg-sidebar-accent pt-4 h-48 data-[state=open]:text-sidebar-accent-foreground"
         >
           <Avatar className="size-[6rem] overflow-hidden">
-            <AvatarImage className="size-full" src="https:github.com/shadcn.png" />
+            <AvatarImage className="size-full" src={logoProfile} />
             <AvatarFallback className="size-full">CN</AvatarFallback>
           </Avatar>
           {open || openMobile ? (

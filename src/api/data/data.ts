@@ -9,6 +9,7 @@ const createConfiguration = async () => {
     if (configurationCount === 0) {
       await prisma.configuration.create({
         data: {
+          id: 1,
           theme: "light",
           builderType: "Torre",
           aptType: "Apartamento",
@@ -153,7 +154,7 @@ const createTypeVehicles = async () => {
       });
     }
   } catch (error) {
-    throw Error()
+    console.error("Error al verificar o crear el tipo vehiculo por defecto:", error);
   }
 };
 

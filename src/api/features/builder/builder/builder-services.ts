@@ -3,6 +3,7 @@ import { prisma } from "../../../utils/prisma";
 import { SendResponse } from "../../../utils/sendResponse";
 import { validateErrorCatch } from "../../../utils/validateError";
 import { idSchema } from "../../../schemas/id-schema";
+import type { Builder } from "@prisma/client"
 
 export const createBuilderUniqueService = async () => {
   try {
@@ -71,8 +72,6 @@ export const getAllBuilderService = async () => {
       }
     });
 
-    console.log(torres);
-
     const builderList = await Promise.all(torres.map(async (torre) => {
       const totalApartments = await prisma.apartament.count({
         where: {
@@ -86,8 +85,6 @@ export const getAllBuilderService = async () => {
         state: torre.state.state,
       };
     }));
-
-    console.log(builderList);
 
     return new SendResponse(
       "success",
@@ -130,6 +127,36 @@ export const deleteBuilderService = async (id: number) => {
       200,
       "Torre eliminada",
       "Torre eliminada",
+    );
+  } catch (error) {
+    return validateErrorCatch(error);
+  }
+};
+
+export const builderByIdService = async (id: number) => {
+  try {
+    const id_builder = idSchema.parse(id);
+
+    const builderById = await prisma.builder.findUnique({
+      where: {
+        id: Number(id_builder),
+      },
+    });
+
+    if (!builderById) {
+      return new SendResponse<string>(
+        "error",
+        404,
+        "No se encontró el builder",
+        "No se encontró el builder"
+      );
+    }
+
+    return new SendResponse<Builder>(
+      "success",
+      200,
+      "Torres",
+      builderById
     );
   } catch (error) {
     return validateErrorCatch(error);

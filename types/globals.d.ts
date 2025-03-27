@@ -3,6 +3,7 @@ import type { GetAll } from "./pagination.model";
 import type { SendResponse } from "./response.model";
 import type { GetAllBuilder } from "./builder/builder-interface"
 import type { MultipleModel } from "./multiple-interface";
+import type { SettingOptions } from "./setting/setting-interface";
 
 // import type { RoleModel } from "./usuarios/role-model";
 // import type { UsuarioModel } from "./usuarios/usuario-model";
@@ -11,26 +12,16 @@ import type { MultipleModel } from "./multiple-interface";
 // import type { VehiculoModel, TipoVehiculoModel } from "./vehiculo/vehculo-model";
 // import type { TorreModel, ApartamentoModel } from "./apartamento/apartamento-interface"
 
-declare module "*.png" {
-  const value: string;
-  export default value;
-}
-
-declare module "*.svg" {
-  export const ReactComponent: FunctionComponent<
-    SVGProps<SVGSVGElement>
-  >;
-  const src: string;
-  export default src;
-}
-
 declare global {
   interface RoleModelI extends RoleModel { }
   interface SendResponseI<T> extends SendResponse<T> { }
   interface PaginationAllI extends GetAll { }
   interface MultipleModelI extends MultipleModel { }
+  interface ThemeI extends Theme { }
 
   interface GetAllBuilderModelI extends GetAllBuilder { }
+
+  interface SettingOptionsI extends SettingOptions { }
 
 
 
@@ -53,3 +44,5 @@ declare global {
 
   // interface ApartamentoModelI extends ApartamentoModel { }
 }
+
+export { };
