@@ -18,15 +18,14 @@ const createWindow = async () => {
     minHeight: 600,
     minWidth: 500,
     frame: true,
-    autoHideMenuBar: true,
     show: true,
-    // contentSecurityPolicy: "script-src 'self' 'unsafe-eval'",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
   mainWindow.maximize();
+
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 

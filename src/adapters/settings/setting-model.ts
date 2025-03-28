@@ -20,4 +20,14 @@ export const SettingApi = {
     SendResponseI<SettingOptionsI>
   > => ipcRenderer.invoke("getSettingsOptions"),
 
+  getDataCompany: async (): Promise<
+    SendResponseI<string> |
+    SendResponseI<null> |
+    SendResponseI<CompanyDataI>
+  > => ipcRenderer.invoke("getDataCompany"),
+
+  updateDataCompany: async (payload: SettingsCompanyI): Promise<
+    SendResponseI<string> |
+    SendResponseI<null>
+  > => ipcRenderer.invoke("updateDataCompany", payload),
 };

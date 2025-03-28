@@ -15,9 +15,6 @@ const api = {
   // ...visitanteApi,
   // ...residenteApi,
   // ...vehiculoAPi,
-  quit: () => ipcRenderer.send("quit"),
-  minimize: () => ipcRenderer.send("minimize"),
-  maximize: () => ipcRenderer.send("maximize"),
 };
 
 

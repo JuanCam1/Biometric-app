@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 
-const SkeletonOptionsSettings = () => {
+const SkeletonCompanySettings = () => {
   return (
     <div className="flex flex-col items-center gap-8 p-8 w-full h-auto">
       <div className="p-6 border border-zinc-500 rounded-md w-full h-full">
@@ -49,4 +49,4 @@ const SkeletonOptionsSettings = () => {
     </div>
   )
 }
-export default SkeletonOptionsSettings
+export default SkeletonCompanySettings

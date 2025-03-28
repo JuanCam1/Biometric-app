@@ -172,16 +172,26 @@ enum Theme {
 
 model Company {
   id          Int     @id @default(autoincrement())
-  name        String  @unique
-  description String?
-  logo        String?
-  address     String?
-  city        String?
-  postalCode  String?
-  phone       String?
-  email       String?
-  website     String?
-  nit         String?
+  name        String
+  description String
+  logo        String
+  address     String
+  city        String
+  postalCode  String
+  phone       String
+  email       String
+  website     String
+  nit         String
+  randomId    String?
+}
+
+model Residentialcomplex {
+  id      Int    @id @default(autoincrement())
+  name    String
+  address String
+  city    String
+  phone   String
+  email   String
 }
 
 model AdministrationArea {

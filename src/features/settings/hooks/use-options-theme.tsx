@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { changeTheme } from "../services/settings-api";
 import { queryClient } from "@/lib/query";
 import { KeysQuery } from "@/const/keys-query";
+import { notification } from "@/lib/notification";
 
 
 
@@ -18,10 +19,7 @@ const useOptions = ({ themeDb, id }: Props) => {
   const themeMutation = useMutation({
     mutationFn: (payload: Pick<SettingOptionsI, "id" | "theme">) => {
       return changeTheme(payload);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [KeysQuery.settingsOptions] })
-    },
+    }
   })
 
   useEffect(() => {
@@ -32,15 +30,21 @@ const useOptions = ({ themeDb, id }: Props) => {
 
 
   const onChangeTheme = (theme: Theme) => {
-    themeMutation.mutate({
-      id: Number(id),
-      theme: theme
-    }, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [KeysQuery.settingsOptions] })
-        setTheme(theme);
-      },
-    })
+    try {
+      themeMutation.mutate({
+        id: Number(id),
+        theme: theme
+      }, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: [KeysQuery.settingsOptions] })
+          setTheme(theme);
+          notification("Configuración guardada", "success");
+        },
+      })
+    } catch (error) {
+      notification("Error al guardar la configuración", "error");
+      console.log(error);
+    }
   }
   return {
     onChangeTheme,

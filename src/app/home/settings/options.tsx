@@ -1,13 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Paintbrush } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+
+import { KeysQuery } from "@/const/keys-query";
+import { getSettingsOptions } from "@/features/settings/services/settings-api";
 import FormOptionsSettings from "@/features/settings/components/form-options-settings";
 import ToggleModeSettings from "@/features/settings/components/toggle-mode-settings";
-import { KeysQuery } from "@/const/keys-query";
-import { useQuery } from "@tanstack/react-query";
-import { getSettingsOptions } from "@/features/settings/services/settings-api";
 import SkeletonOptionsSettings from "@/features/settings/components/skeleton-options-settings";
+
+import { Separator } from "@/components/ui/separator";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { notification } from "@/lib/notification";
 
 export const Route = createFileRoute("/home/settings/options")({
   component: OptionsComponent,
@@ -23,17 +32,12 @@ function OptionsComponent() {
     return <SkeletonOptionsSettings />
   }
 
-  if (isError || !data.data) {
-    return <span>Error: error de configuracion</span>
+  if (isError || !data.data || typeof data.data === "string") {
+    notification("Error al obtener la configuración", "error");
+    return <SkeletonOptionsSettings />
   }
 
-  if (typeof data.data === "string") {
-    return <span>Error: {data.data}</span>
-  }
-
-  console.log(data.data);
-
-  const { id, theme, builderType, aptType } = data.data;
+  const { id, theme, builderType, aptType, maxVehiclesPerResident } = data.data;
 
   return (
     <div className="flex flex-col items-center gap-8 p-8 w-full h-full">
@@ -58,6 +62,7 @@ function OptionsComponent() {
             id={id}
             builderName={builderType}
             aptName={aptType}
+            maxVehiclesPerResident={maxVehiclesPerResident}
           />
         </CardContent >
       </Card>

@@ -1,48 +1,56 @@
 import type { FunctionComponent, SVGProps } from "react";
-import type { GetAll } from "./pagination.model";
+import type { PaginationAll } from "./pagination.model";
 import type { SendResponse } from "./response.model";
 import type { GetAllBuilder } from "./builder/builder-interface"
 import type { MultipleModel } from "./multiple-interface";
-import type { SettingOptions } from "./setting/setting-interface";
+import type { SettingOptions, SettingsCompany, Theme } from "./setting/setting-interface";
+import type { RoleModel } from "./usuarios/role-model";
 
-// import type { RoleModel } from "./usuarios/role-model";
-// import type { UsuarioModel } from "./usuarios/usuario-model";
-// import type { PaginationResidentesResponse, ResidenteCreateModel, ResidenteModel } from "./residentes/residente-model";
-// import type { VisitaModel, getVisitasByTorreFecha } from "./visita/visita-model";
-// import type { VehiculoModel, TipoVehiculoModel } from "./vehiculo/vehculo-model";
-// import type { TorreModel, ApartamentoModel } from "./apartamento/apartamento-interface"
 
 declare global {
-  interface RoleModelI extends RoleModel { }
-  interface SendResponseI<T> extends SendResponse<T> { }
-  interface PaginationAllI extends GetAll { }
-  interface MultipleModelI extends MultipleModel { }
-  interface ThemeI extends Theme { }
+  type SendResponseI<T> = SendResponse<T>;
+  type PaginationAllI = PaginationAll;
+  type MultipleModelI = MultipleModel;
+  type ThemeI = Theme;
+  type GetAllBuilderModelI = GetAllBuilder;
+  type SettingOptionsI = SettingOptions;
+  type SettingsCompanyI = SettingsCompany;
 
-  interface GetAllBuilderModelI extends GetAllBuilder { }
-
-  interface SettingOptionsI extends SettingOptions { }
-
-
-
-  // interface ResidenteModelI extends ResidenteModel { }
-  // interface ResidenteCreateModelI extends ResidenteCreateModel { }
-  // interface PaginationResidenteModelI extends PaginationResidentesResponse { }
-
-  // interface UsuarioModelI extends UsuarioModel { }
-
-
-  // interface MultipleAptModelI extends MultipleModel {
-  //   id_torre: number;
-  // }
-
-  // interface VisitaModelI extends VisitaModel { }
-  // interface getVisitasByTorreFechaI extends getVisitasByTorreFecha { }
-
-  // interface VehiculoModelI extends VehiculoModel { }
-  // interface TipoVehiculoModelI extends TipoVehiculoModel { }
-
-  // interface ApartamentoModelI extends ApartamentoModel { }
+  interface CompanyDataI extends Omit<SettingsCompanyI, "logo"> {
+    logo: {
+      blob: Buffer<ArrayBufferLike>;
+      type: string;
+    } | null;
+  }
 }
+
+declare module "*.png" {
+  const value: string;
+  export default value;
+}
+
+declare module "*.jpeg" {
+  const value: string;
+  export default value;
+}
+
+declare module "*.jpg" {
+  const value: string;
+  export default value;
+}
+
+declare module "*.webp" {
+  const value: string;
+  export default value;
+}
+
+declare module "*.svg" {
+  export const ReactComponent: FunctionComponent<
+    SVGProps<SVGSVGElement>
+  >;
+  const src: string;
+  export default src;
+}
+
 
 export { };

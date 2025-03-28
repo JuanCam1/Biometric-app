@@ -7,6 +7,7 @@ import {
 import { routeTree } from "../routeTree.gen";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/query";
+import { Toaster } from "sonner";
 
 const memoryHistory = createMemoryHistory({
   initialEntries: ["/"],
@@ -24,6 +25,7 @@ export default function Main() {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <Toaster richColors duration={2000} />
     </QueryClientProvider>
   )
 }

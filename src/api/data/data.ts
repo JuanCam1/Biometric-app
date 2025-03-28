@@ -158,6 +158,33 @@ const createTypeVehicles = async () => {
   }
 };
 
+const createCompany = async () => {
+  try {
+    const companyCount = await prisma.company.count();
+
+    if (companyCount === 0) {
+      await prisma.company.create({
+        data: {
+          id: 1,
+          name: "Empresa",
+          description: "Sin descripción",
+          logo: "Sin logo",
+          address: "Sin dirección",
+          city: "Bucaramanga",
+          postalCode: "Sin código postal",
+          phone: "Sin teléfono",
+          email: "Sin email",
+          website: "Sin web",
+          nit: "Sin NIT",
+          randomId: null,
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error al verificar o crear la empresa por defecto:", error);
+  }
+};
+
 export const defaultData = async () => {
   try {
     await createConfiguration();
@@ -166,6 +193,7 @@ export const defaultData = async () => {
     await createDocumentsTypes();
     await createUsers();
     await createTypeVehicles();
+    createCompany();
   } catch (error) {
     console.log(error);
   }

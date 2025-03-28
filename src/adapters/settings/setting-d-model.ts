@@ -16,4 +16,14 @@ export interface SettingApiD {
     SendResponseI<SettingOptionsI>
   >;
 
+  getDataCompany: () => Promise<
+    SendResponseI<string> |
+    SendResponseI<null> |
+    SendResponseI<CompanyDataI>>;
+
+  updateDataCompany: (payload: SettingsCompanyI) => Promise<
+    SendResponseI<string> |
+    SendResponseI<null>
+  >;
+
 }

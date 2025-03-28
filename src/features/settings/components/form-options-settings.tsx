@@ -1,6 +1,14 @@
 import type { FC } from "react";
 import { Building2, Home, Save } from "lucide-react";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import useOptionsNames from "../hooks/use-option-names";
@@ -10,15 +18,17 @@ interface Props {
   builderName: string;
   aptName: string;
   id: number;
+  maxVehiclesPerResident: number;
 }
-const FormOptionsSettings: FC<Props> = ({ id, builderName, aptName }) => {
+const FormOptionsSettings: FC<Props> = ({ id, builderName, aptName, maxVehiclesPerResident }) => {
   const {
     form,
     onSubmit,
   } = useOptionsNames({
     builderName,
     aptName,
-    id
+    id,
+    maxVehiclesPerResident
   });
   return (
     <Form {...form}>
@@ -36,18 +46,18 @@ const FormOptionsSettings: FC<Props> = ({ id, builderName, aptName }) => {
           <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
             <FormField
               control={form.control}
-              name="nombreTorres"
+              name="builderType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center">
                     <Building2 className="mr-2 w-4 h-4" />
-                    Nombre para "Torres"
+                    Nombre para "Torre"
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
                   <FormDescription>
-                    Ejemplo: Edificios, Bloques, Manzanas
+                    Ejemplo: Edificio, Bloque, Manzana
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -56,19 +66,36 @@ const FormOptionsSettings: FC<Props> = ({ id, builderName, aptName }) => {
 
             <FormField
               control={form.control}
-              name="nombreApartamentos"
+              name="aptType"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex items-center">
                     <Home className="mr-2 w-4 h-4" />
-                    Nombre para "Apartamentos"
+                    Nombre para "Apartamento"
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
                   <FormDescription>
-                    Ejemplo: Apts, Viviendas, Casas
+                    Ejemplo: Apt, Vivienda, Casa
                   </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="maxVehiclesPerResident"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center">
+                    <Home className="mr-2 w-4 h-4" />
+                    Vehiculos por Residente
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
