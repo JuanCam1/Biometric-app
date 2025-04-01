@@ -1,3 +1,4 @@
+import type { Builder } from "@prisma/client";
 
 export interface BuilderApiD {
   createBuilderUnique: () => Promise<
@@ -18,6 +19,12 @@ export interface BuilderApiD {
     id_torre: number,
   ) => Promise<
     SendResponseI<string> | SendResponseI<null>
+  >;
+
+  builderById: (
+    id_torre: number,
+  ) => Promise<
+    SendResponseI<string> | SendResponseI<null> | SendResponseI<Builder>
   >;
 
   changeStateBuilder: (

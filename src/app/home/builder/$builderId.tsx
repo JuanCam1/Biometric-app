@@ -14,6 +14,9 @@ import AptByIdBuilderList from "@/features/builder/apartament/sections/aptById-l
 import TooltipData from "@/components/shared/tooltip-data";
 import ModalApt from "@/features/builder/apartament/components/modal-apt";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getByIdBuilder } from "@/features/builder/builder/services/builder-api";
+import { KeysQuery } from "@/const/keys-query";
 
 export const Route = createFileRoute("/home/builder/$builderId")({
   component: BuilderIdComponent,
@@ -28,6 +31,24 @@ function BuilderIdComponent() {
   const [isOpenMult, setIsOpenMult] = useState(false);
   const { builderId } = Route.useLoaderData();
 
+  const { isPending, isError, data } = useQuery({
+    queryKey: [KeysQuery.builderById],
+    queryFn: () => getByIdBuilder(Number(builderId))
+  })
+
+  if (isPending) {
+    return (
+      <div className="6">
+        Cargando...
+      </div>
+    )
+  }
+
+
+  if (isError || !data.data || typeof data.data === "string") {
+    return <span>Error: </span>
+  }
+
   const handleOpen = () => {
     setIsOpenMult(true);
   };
@@ -35,6 +56,7 @@ function BuilderIdComponent() {
   const changeOpen = (open: boolean) => {
     setIsOpenMult(open);
   };
+
 
   return (
     <div className="flex flex-col items-center gap-8 p-8 w-full h-full">
@@ -50,7 +72,7 @@ function BuilderIdComponent() {
       </div>
       <Card className="relative dark:bg-zinc-950/80 w-full">
         <CardHeader>
-          <CardTitle>Gestión de Apartamentos Torre id {builderId}</CardTitle>
+          <CardTitle>Gestión de Apartamentos de {data.data.name} </CardTitle>
           <CardDescription>Administra los apartamentos.</CardDescription>
         </CardHeader>
         <CardContent>

@@ -158,8 +158,6 @@ export const getDataCompanyService = async () => {
       );
     }
 
-    console.log("company: ", company)
-
     let base64Logo = null;
     if (company.randomId) {
       const base64GetImage = getImage(company.logo);
@@ -172,8 +170,6 @@ export const getDataCompanyService = async () => {
       randomId: company.randomId,
       logo: base64Logo
     }
-
-    console.log("companyData: ", companyData);
 
     return new SendResponse<CompanyDataI>(
       "success",

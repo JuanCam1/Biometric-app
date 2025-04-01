@@ -143,7 +143,16 @@ export const builderByIdService = async (id: number) => {
       },
     });
 
-    if (!builderById) {
+    const nameBuilder = await prisma.configuration.findUnique({
+      where: {
+        id: 1
+      },
+      select: {
+        builderType: true
+      }
+    })
+
+    if (!builderById || !nameBuilder) {
       return new SendResponse<string>(
         "error",
         404,
@@ -152,11 +161,16 @@ export const builderByIdService = async (id: number) => {
       );
     }
 
+    const data: Builder = {
+      ...builderById,
+      name: `${nameBuilder.builderType}-${builderById.name}`
+    }
+
     return new SendResponse<Builder>(
       "success",
       200,
       "Torres",
-      builderById
+      data
     );
   } catch (error) {
     return validateErrorCatch(error);

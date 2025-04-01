@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
 function LoginPage() {
   return (
     <Navigate
-      to="/home/settings/company"
+      to="/home/builder"
     />
     // <div className="relative flex flex-col gap-6 w-full max-w-sm">
     //   <div className="top-0 right-0 absolute">

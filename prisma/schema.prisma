@@ -18,7 +18,7 @@ model Builder {
 
 model Apartament {
   id        Int        @id @default(autoincrement())
-  name      String     @unique
+  name      String
   builderId Int
   builder   Builder    @relation("apartBuilder", fields: [builderId], references: [id])
   residents Resident[] @relation("apartResident")

@@ -1,4 +1,4 @@
-import { changeStateBuilderService, createBuilderMultipleService, createBuilderUniqueService, deleteBuilderService, getAllBuilderService } from "./builder-services";
+import { builderByIdService, changeStateBuilderService, createBuilderMultipleService, createBuilderUniqueService, deleteBuilderService, getAllBuilderService } from "./builder-services";
 
 export const createBuilderUniqueController = async () => {
   return await createBuilderUniqueService();
@@ -17,6 +17,10 @@ export const getAllBuilderController = async () => {
 
 export const deleteBuilderController = async (_: unknown, id_torre: number) => {
   return await deleteBuilderService(id_torre);
+};
+
+export const builderByIdServiceController = async (_: unknown, id_torre: number) => {
+  return await builderByIdService(id_torre);
 };
 
 export const changeStateBuilderController = async (_: unknown, id_torre: number) => {

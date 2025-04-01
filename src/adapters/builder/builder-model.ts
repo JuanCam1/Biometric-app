@@ -1,3 +1,4 @@
+import type { Builder } from "@prisma/client";
 import { ipcRenderer } from "electron";
 
 export const BuilderApi = {
@@ -21,6 +22,12 @@ export const BuilderApi = {
   ): Promise<
     SendResponseI<string> | SendResponseI<null>
   > => ipcRenderer.invoke("deleteBuilder", id_torre),
+
+  builderById: async (
+    id_torre: number,
+  ): Promise<
+    SendResponseI<string> | SendResponseI<null> | SendResponseI<Builder>
+  > => ipcRenderer.invoke("builderById", id_torre),
 
   changeStateBuilder: async (
     id_torre: number,
